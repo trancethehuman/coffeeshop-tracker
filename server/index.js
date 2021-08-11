@@ -1,4 +1,5 @@
 const express = require('express');
+const shops = require('./routes/shops');
 const cors = require('cors');
 const mongoose = require('mongoose');
 require('dotenv').config();
@@ -8,6 +9,7 @@ const mongodbPassword = process.env.MONGODB_PASSWORD;
 const connectionString = `mongodb+srv://hainghiem:${mongodbPassword}@coffeeshop-tracker.kmuzu.mongodb.net/myFirstDatabase?retryWrites=true&w=majority`;
 
 const app = express();
+app.use('/api/v1/shops', shops)
 
 //Start express server
 const PORT = process.env.PORT || 3000;
