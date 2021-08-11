@@ -10,7 +10,8 @@ const mongodbPassword = process.env.MONGODB_PASSWORD;
 const connectionString = `mongodb+srv://hainghiem:${mongodbPassword}@coffeeshop-tracker.kmuzu.mongodb.net/myFirstDatabase?retryWrites=true&w=majority`;
 
 //Start express server
-const listener = app.listen(process.env.PORT || 3000, () => console.log(`Express app listening on port ${listener.address().port}.`));
+const PORT = process.env.PORT || 3000;
+const listener = app.listen( PORT, () => console.log(`Express app listening in ${process.env.NODE_ENV} mode, on port ${listener.address().port}.`));
 
 //Connect to database
 mongoose.connect(connectionString, {
