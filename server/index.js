@@ -19,13 +19,13 @@ app.use('/api/v1/shops', shops);
 
 // Start express server
 const PORT = process.env.PORT || 3000;
-const server = app.listen( PORT, () => console.log(`Express app listening in ${process.env.NODE_ENV} mode, on port ${server.address().port}.`));
+const server = app.listen( PORT, () => console.log(`Express app listening in ${process.env.NODE_ENV} mode, on port ${server.address().port}.`.cyan.bold));
 
 // Connect to database
 connectToDatabase();
 
 // Unhandled Rejection Promises (for when there's no catch to catch the stuff, it falls to this). Shuts the server down in case this happens
 process.on('unhandledRejection', (err, promise) => {
-    console.log(`Error: ${err.message}`);
+    console.log(`Error: ${err.message}`.red.bold);
     server.close(() => process.exit(1));
 })

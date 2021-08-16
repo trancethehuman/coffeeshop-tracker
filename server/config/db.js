@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const colors = require('colors');
 require('dotenv').config();
 
 //Setup database credentials
@@ -9,7 +10,7 @@ const connectToDatabase = async () => {
         useNewUrlParser: true,
         useUnifiedTopology: true
     })
-    .then(()=> console.log(`Connected to MongoDB Atlas Database!`));
+    console.log(`Connected to MongoDB Atlas Database! ${connection.connection.host}`.cyan.bold);
 };
 
 module.exports = connectToDatabase;
