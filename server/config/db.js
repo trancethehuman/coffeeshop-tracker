@@ -9,8 +9,7 @@ const connectToDatabase = async () => {
         useNewUrlParser: true,
         useUnifiedTopology: true
     })
-    .then(()=> console.log(`Connected to MongoDB Atlas Database!`))
-    .catch(err => console.log(err));
-}
+    .then(()=> console.log(`Connected to MongoDB Atlas Database!`));
+};
 
 module.exports = connectToDatabase;

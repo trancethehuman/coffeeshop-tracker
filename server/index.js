@@ -3,6 +3,7 @@ const shops = require('./routes/shops'); //routes
 const cors = require('cors');
 const mongoose = require('mongoose');
 const morgan = require('morgan'); //logger library
+const colors = require('colors'); //get colors in node.js console
 require('dotenv').config({path: './config/config.env'});
 const connectToDatabase = require('./config/db')
 
