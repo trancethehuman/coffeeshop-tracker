@@ -8,13 +8,15 @@ require('dotenv').config({path: './config/config.env'});
 const connectToDatabase = require('./config/db')
 
 const app = express();
+app.use(express.json());
 
 // Logging (only in development mode)
 if (process.env.NODE_ENV === `development`) {
     app.use(morgan('dev'));
 }
 
-app.use('/api/v1/shops', shops);
+app.use('/api/v1/shops', shops); //routes
+
 
 
 // Start express server
