@@ -1,3 +1,5 @@
+const Coffeeshop = require('../models/Coffeeshop');
+
 // @description         Get all coffeeshop records
 // @route               GET /api/v1/shops
 // @access              Public

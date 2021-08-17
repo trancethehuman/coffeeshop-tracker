@@ -20,7 +20,7 @@ const CoffeeshopSchema = new Schema({
         type: Number,
         required: false,
         min: [1, `Lowest rating is 1 or higher.`],
-        max: [10. `Highest rating is 10 or lower.`]
+        max: [10, `Highest rating is 10 or lower.`]
     },
     phone: {
         type: String,
