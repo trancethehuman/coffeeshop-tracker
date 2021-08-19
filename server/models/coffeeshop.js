@@ -13,7 +13,7 @@ const CoffeeshopSchema = new Schema({
     slug: String,
     description: {
         type: String,
-        required: [true, `Please give this shop a brief description.`],
+        required: [false, `Please give this shop a brief description.`],
         maxlength: [500, `Description has to be under 500 characters.`]
     },
     rating: {
