@@ -24,11 +24,15 @@ exports.getShop = (req, res, next) => {
 // @route               POST /api/v1/shops/
 // @access              Private
 exports.createShop = async (req, res, next) => {
-    const shop = Coffeeshop.create(req.body); //create a new coffeeshop using the mongoose model and data from the body of the POST request
-    res.status(200).json({
-        success: true,
-        message: `Create new coffeeshop entry!`
-    });
+    try {
+        const shop = Coffeeshop.create(req.body); //create a new coffeeshop using the mongoose model and data from the body of the POST request
+        res.status(200).json({
+            success: true,
+            message: `Create new coffeeshop entry!`
+        });
+    } catch(err) {
+        res.status(400).json({success: false})
+    }
 }
 
 // @description         Update a coffeeshop record
