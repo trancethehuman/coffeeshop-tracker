@@ -7,7 +7,8 @@
     "packages/*"
   ],
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "server-dev": "yarn workspace server run dev"
   },
   "repository": "git+https://github.com/trancethehuman/coffeeshop-tracker.git",
   "author": "Hai",
