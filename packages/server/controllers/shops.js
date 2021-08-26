@@ -23,19 +23,20 @@ exports.getAllShops =  async (req, res, next) => {
 exports.getShop = async (req, res, next) => {
     try {
         const shop = await Coffeeshop.findById(req.params.id);
-        res.status(200).json({
-            success: true,
-            data: shop
-        })
+        if (!shop) {
+            console.log(shop);
+            res.status(400).json({success:false, message: `Query syntax is correct, but there isn't any data that we could find.`})
+        } else {
+            res.status(200).json({
+                success: true,
+                data: shop
+            })
+        }
     } catch(err) {
         res.status(400).json({
             success: false
         })
     }
-    res.status(200).json({
-        success: true,
-        data: `Getting ${req.params.id}!`
-    });
 }
 
 // @description         Create one coffeeshop record
@@ -56,7 +57,20 @@ exports.createShop = async (req, res, next) => {
 // @description         Update a coffeeshop record
 // @route               PUT /api/v1/shops/:id
 // @access              Private
-exports.updateShop = (req, res, next) => {
+exports.updateShop = async (req, res, next) => {
+    try {
+        const shop = await Coffeeshop.findByIdAndUpdate(req.params.id, req.body, {
+            new: true,
+            runValidators: true
+        });
+        if (!shop) {
+            res.status(400).json({success: false, message: `Query syntax is correct, but there isn't any data that we could find.`})
+        } else {
+            res.status(200).json({success: true, data: shop})
+        }
+    } catch(err) {
+        res.status(400).json({success: false})
+    }
     res.status(200).json({
         success: true,
         message: `Coffeeshop ${req.params.id} updated!`
