@@ -8,7 +8,7 @@ exports.getAllShops =  async (req, res, next) => {
         const shops = await Coffeeshop.find();
         res.status(200).json({
             success: true,
-            message: shops
+            data: shops
         });
     } catch(err) {
         res.status(400).json({
@@ -20,10 +20,21 @@ exports.getAllShops =  async (req, res, next) => {
 // @description         Get one coffeeshop record
 // @route               GET /api/v1/shops/:id
 // @access              Public
-exports.getShop = (req, res, next) => {
+exports.getShop = async (req, res, next) => {
+    try {
+        const shop = await Coffeeshop.findById(req.params.id);
+        res.status(200).json({
+            success: true,
+            data: shop
+        })
+    } catch(err) {
+        res.status(400).json({
+            success: false
+        })
+    }
     res.status(200).json({
         success: true,
-        message: `Getting ${req.params.id}!`
+        data: `Getting ${req.params.id}!`
     });
 }
 
