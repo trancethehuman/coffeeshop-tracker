@@ -3,11 +3,18 @@ const Coffeeshop = require('../models/Coffeeshop');
 // @description         Get all coffeeshop records
 // @route               GET /api/v1/shops
 // @access              Public
-exports.getAllShops = (req, res, next) => {
-    res.status(200).json({
-        success: true,
-        message: "All Coffeeshops in database!"
-    });
+exports.getAllShops =  async (req, res, next) => {
+    try {
+        const shops = await Coffeeshop.find();
+        res.status(200).json({
+            success: true,
+            message: shops
+        });
+    } catch(err) {
+        res.status(400).json({
+            success: false
+        })
+    }
 }
 
 // @description         Get one coffeeshop record
@@ -25,10 +32,10 @@ exports.getShop = (req, res, next) => {
 // @access              Private
 exports.createShop = async (req, res, next) => {
     try {
-        const shop = Coffeeshop.create(req.body); //create a new coffeeshop using the mongoose model and data from the body of the POST request
-        res.status(200).json({
+        const shop = await Coffeeshop.create(req.body); //create a new coffeeshop using the mongoose model and data from the body of the POST request
+        res.status(201).json({
             success: true,
-            message: `Create new coffeeshop entry!`
+            data: shop
         });
     } catch(err) {
         res.status(400).json({success: false})

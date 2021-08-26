@@ -6,9 +6,10 @@ const Schema = mongoose.Schema;
 const CoffeeshopSchema = new Schema({
     name: {
         type: String,
+        unique: true,
         required: [true, `Please give the coffeeshop a name.`],
         trim: true,
-        maxlength: [50, `Name cannot be longer than 50 characters`]
+        maxlength: [100, `Name cannot be longer than 100 characters`]
     },
     slug: String,
     description: {

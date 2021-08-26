@@ -8,7 +8,9 @@ const connectionString = process.env.MONGODB_CONNECTION_STRING;
 const connectToDatabase = async () => {
     const connection = await mongoose.connect(connectionString, {
         useNewUrlParser: true,
-        useUnifiedTopology: true
+        useUnifiedTopology: true,
+        useCreateIndex: true,
+        autoIndex: true
     })
     console.log(`Connected to MongoDB Atlas Database! ${connection.connection.host}`.cyan.bold);
 };
