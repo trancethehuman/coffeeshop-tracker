@@ -2,7 +2,6 @@
   "name": "coffeeshop-tracker",
   "version": "1.0.0",
   "description": "A directory for coffeeshops in major cities",
-  "main": "index.js",
   "private": true,
   "workspaces": [
     "client",
@@ -11,10 +10,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/trancethehuman/coffeeshop-tracker.git"
-  },
+  "repository": "git+https://github.com/trancethehuman/coffeeshop-tracker.git",
   "author": "Hai",
   "license": "MIT",
   "bugs": {
