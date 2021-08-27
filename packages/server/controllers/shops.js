@@ -1,4 +1,5 @@
 const Coffeeshop = require('../models/Coffeeshop');
+const ErrorResponse = require('../utils/errorResponse');
 
 // @description         Get all coffeeshop records
 // @route               GET /api/v1/shops
@@ -8,6 +9,7 @@ exports.getAllShops =  async (req, res, next) => {
         const shops = await Coffeeshop.find();
         res.status(200).json({
             success: true,
+            count: shops.length,
             data: shops
         });
     } catch(err) {
@@ -24,8 +26,7 @@ exports.getShop = async (req, res, next) => {
     try {
         const shop = await Coffeeshop.findById(req.params.id);
         if (!shop) {
-            console.log(shop);
-            res.status(400).json({success:false, message: `Query syntax is correct, but there isn't any data that we could find.`})
+            next(new ErrorResponse(`Shop of ID ${req.params.id} not found.`, 404));
         } else {
             res.status(200).json({
                 success: true,
@@ -33,9 +34,7 @@ exports.getShop = async (req, res, next) => {
             })
         }
     } catch(err) {
-        res.status(400).json({
-            success: false
-        })
+        next(new ErrorResponse(`Shop of ID ${req.params.id} not found.`, 404));
     }
 }
 
@@ -66,23 +65,27 @@ exports.updateShop = async (req, res, next) => {
         if (!shop) {
             res.status(400).json({success: false, message: `Query syntax is correct, but there isn't any data that we could find.`})
         } else {
-            res.status(200).json({success: true, data: shop})
+            res.status(200).json({success: true, data: shop, status: `Deleted!`})
         }
     } catch(err) {
         res.status(400).json({success: false})
     }
-    res.status(200).json({
-        success: true,
-        message: `Coffeeshop ${req.params.id} updated!`
-    });
 }
 
 // @description         Delete a coffeeshop record
 // @route               DELETE /api/v1/shops/:id
 // @access              Private
-exports.deleteShop = (req, res, next) => {
-    res.status(200).json({
-        success: true,
-        message: `Deleting shop record  ${req.params.id}!`
-    });
+exports.deleteShop = async (req, res, next) => {
+    try {
+        const shop = await Coffeeshop.findByIdAndDelete(req.params.id);
+        if(!shop) {
+            res.status(400).json({success: false, message: `Query syntax is correct, but there isn't any data that we could find.`})
+        }
+        res.status(200).json({
+            success: true,
+            data: shop
+        })
+    } catch(err) {
+        res.status(400).json({success: false})
+    }
 }

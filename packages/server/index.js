@@ -6,6 +6,7 @@ const morgan = require('morgan'); //logger library
 const colors = require('colors'); //get colors in node.js console
 require('dotenv').config({path: './config/config.env'});
 const connectToDatabase = require('./config/db')
+const errorHandler = require('./middlewares/error');
 
 const app = express();
 app.use(express.json());
@@ -15,8 +16,9 @@ if (process.env.NODE_ENV === `development`) {
     app.use(morgan('dev'));
 }
 
-app.use('/api/v1/shops', shops); //routes
+app.use('/api/v1/shops', shops); //all routes are handled here
 
+app.use(errorHandler); // Error handler middleware
 
 
 // Start express server
