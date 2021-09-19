@@ -1,3 +1,5 @@
+import Card from 'react-bootstrap';
+
 // Organize coffeeshop cards into a scrollable box
 const ShopCardsContainer = () => {
     return (
